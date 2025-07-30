@@ -1,5 +1,6 @@
 import { cart, addToCart } from '../data/cart.js';
 import { product } from '../data/products.js';
+import { formattingPrice } from './utils.js/fixPrice.js';
 
 let Accumulator = '';
 
@@ -21,7 +22,7 @@ product.forEach((products) => {
         </div>
 
         <div class="product-price">
-          $${(products.price / 100).toFixed(2)}
+          $${formattingPrice(products.price)}
         </div >
 
         <div class="product-quantity-container">
