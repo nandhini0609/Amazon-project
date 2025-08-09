@@ -1,20 +1,21 @@
-export let cart = JSON.parse(localStorage.getItem('cart'))
+let cart = JSON.parse(localStorage.getItem('cart'));
 
-if (!cart) {
-    cart = [{
-        productsId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-        quantity: 1
-    }, {
-        productsId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-        quantity: 2
-    }];
-};
+if (!cart || cart.length === 0) {
+    cart = [
+        { productsId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6", quantity: 1, deliveryOptionId: "1" },
+        { productsId: "15b6fc6f-327a-4ec4-896f-486349e85a3d", quantity: 2, deliveryOptionId: "2" },
+        { productsId: "8c9c52b5-5a19-4bcb-a5d1-158a74287c53", quantity: 4, deliveryOptionId: "1" }
+    ];
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
 
 
 
 function saveToCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
+
+export { cart };
 
 export function addToCart(productsId) {
     let matchingItem;
@@ -28,7 +29,8 @@ export function addToCart(productsId) {
     } else {
         cart.push({
             productsId: productsId,
-            quantity: 1
+            quantity: 1,
+            deliveryOptionId: '1'
         });
 
     }
