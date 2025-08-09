@@ -9,19 +9,19 @@ import { deliveryOption } from '../data/deliveryOption.js';
 
 // console.log(deliveryDate.format('dddd, MMMM D'));
 
+function renderOrderSummary() {
+  function deliveryOptionHTML(matchingElement, cartElement) {
+    let html = '';
+    deliveryOption.forEach((option) => {
+      const today = dayjs();
+      const deliveryDate = today.add(option.deliveryDays, 'days');
+      const deliveryDateFormatted = deliveryDate.format('dddd, MMMM D');
+      const deliveryPrice = option.price === 0
+        ? 'FREE'
+        : `${formattingPrice(option.price)}`;
 
-function deliveryOptionHTML(matchingElement, cartElement) {
-  let html = '';
-  deliveryOption.forEach((option) => {
-    const today = dayjs();
-    const deliveryDate = today.add(option.deliveryDays, 'days');
-    const deliveryDateFormatted = deliveryDate.format('dddd, MMMM D');
-    const deliveryPrice = option.price === 0
-      ? 'FREE'
-      : `${formattingPrice(option.price)}`;
-
-    const isChecked = option.id === cartElement.deliveryOptionId;
-    html += `<div class="delivery-option js-delivery-option"
+      const isChecked = option.id === cartElement.deliveryOptionId;
+      html += `<div class="delivery-option js-delivery-option"
     data-product-id="${matchingElement.id}"
     data-delivery-option-id="${option.id}">
                 <input type="radio"
@@ -37,30 +37,25 @@ function deliveryOptionHTML(matchingElement, cartElement) {
                   </div>
                 </div>
               </div>`;
-  });
-  return html;
-}
-;
+    });
+    return html;
+  }
+  ;
 
+  let summaryCartHTML = '';
+  cart.forEach((cartElement) => {
+    const productsId = cartElement.productsId;
 
+    let matchingElement = product.find((CartItem) => CartItem.id === productsId);
+    const selectedDeliveryOption = deliveryOption.find(
+      (option) => option.id === cartElement.deliveryOptionId
+    );
 
+    const today = dayjs();
+    const deliveryDate = today.add(selectedDeliveryOption.deliveryDays, 'days');
+    const deliveryDateFormatted = deliveryDate.format('dddd, MMMM D');
 
-
-
-let summaryCartHTML = '';
-cart.forEach((cartElement) => {
-  const productsId = cartElement.productsId;
-
-  let matchingElement = product.find((CartItem) => CartItem.id === productsId);
-  const selectedDeliveryOption = deliveryOption.find(
-    (option) => option.id === cartElement.deliveryOptionId
-  );
-
-  const today = dayjs();
-  const deliveryDate = today.add(selectedDeliveryOption.deliveryDays, 'days');
-  const deliveryDateFormatted = deliveryDate.format('dddd, MMMM D');
-
-  summaryCartHTML += `<div class="cart-item-container js-delete-button-working-${matchingElement.id}">
+    summaryCartHTML += `<div class="cart-item-container js-delete-button-working-${matchingElement.id}">
             <div class="delivery-date">
               Delivery date: ${deliveryDateFormatted}
             </div>
@@ -94,22 +89,28 @@ cart.forEach((cartElement) => {
               </div>
             </div>
           </div>`;
-});
-
-document.querySelector('.js-cart').innerHTML = summaryCartHTML;
-
-document.querySelectorAll('.delete-link-js').forEach((link) => {
-  link.addEventListener('click', () => {
-    const productsId = link.dataset.productsId;
-    removingCartItem(productsId);
-    const container = document.querySelector(`.js-delete-button-working-${productsId}`);
-    container.remove();
   });
-});
-document.querySelectorAll('.js-delivery-option').
-  forEach((element) => {
-    element.addEventListener('click', () => {
-      const { productId, deliveryOptionId } = element.dataset;
-      updatedeliveryOption(productId, deliveryOptionId)
-    })
-  })
+
+  document.querySelector('.js-cart').innerHTML = summaryCartHTML;
+
+  document.querySelectorAll('.delete-link-js').forEach((link) => {
+    link.addEventListener('click', () => {
+      const productsId = link.dataset.productsId;
+      removingCartItem(productsId);
+      const container = document.querySelector(`.js-delete-button-working-${productsId}`);
+      container.remove();
+    });
+  });
+  document.querySelectorAll('.js-delivery-option').
+    forEach((element) => {
+      element.addEventListener('click', () => {
+        const { productId, deliveryOptionId } = element.dataset;
+        updatedeliveryOption(productId, deliveryOptionId)
+        renderOrderSummary();
+      });
+    });
+
+}
+
+renderOrderSummary();
+
