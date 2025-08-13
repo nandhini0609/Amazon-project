@@ -1,3 +1,18 @@
+import { deliveryOption } from "./deliveryOption.js";
+
+export function getElement(productsId, cartElement) {
+  let matchingElement = product.find((CartItem) =>
+    CartItem.id === productsId);
+  let selectedDeliveryOption = deliveryOption.find(
+    (option) => option.id === cartElement.deliveryOptionId
+  );
+  return {
+    matchingElement,
+    selectedDeliveryOption
+  }
+
+}
+
 export const product = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
