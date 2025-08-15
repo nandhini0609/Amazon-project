@@ -1,6 +1,6 @@
 import { cart, removingCartItem, updatedeliveryOption } from '../../data/cart.js';
 import { product, getElement } from '../../data/products.js';
-import { formattingPrice } from '../utils.js/fixPrice.js';
+import { formattingPrice } from '../utils/fixPrice.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOption } from '../../data/deliveryOption.js';
 import { renderPaymentSummary } from './paymentSummary.js';

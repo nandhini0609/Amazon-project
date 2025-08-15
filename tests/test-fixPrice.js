@@ -1,4 +1,4 @@
-import { formattingPrice } from "../scripts/utils.js/fixPrice.js";
+import { formattingPrice } from "../scripts/utils/fixPrice.js";
 console.log('test suite:Automated testing for the formatting price)')
 
 console.log('testing with random number')
