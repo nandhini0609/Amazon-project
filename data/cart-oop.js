@@ -68,8 +68,8 @@ function Cart(localStorageKey) {
 const cart = Cart('cart-oop');
 const BusinessCart = Cart('business-cart-oop');
 cart.loadToStorage();
+BusinessCart.loadToStorage();
 console.log(cart)
-    ;
 console.log(BusinessCart)
 
 //object oriented programming let us code in a realtime like purchasing in realtime ussing cart hence we can add product or remove product etcc..
