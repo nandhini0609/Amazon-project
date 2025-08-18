@@ -1,6 +1,6 @@
 import { cart, addToCart } from '../data/cart.js';
 import { product } from '../data/products.js';
-import { formattingPrice } from './utils.js/fixPrice.js';
+import { formattingPrice } from './utils/fixPrice.js';
 
 let Accumulator = '';
 
@@ -15,14 +15,14 @@ product.forEach((products) => {
         </div>
 
         <div class="product-rating-container">
-          <img class="product-rating-stars" src="images/ratings/rating-${products.rating.star * 10}.png">
+          <img class="product-rating-stars" src="${products.getStar()}">
           <div class="product-rating-count link-primary">
             ${products.rating.number}
           </div>
         </div>
 
         <div class="product-price">
-          $${formattingPrice(products.price)}
+          "${products.rating}"
         </div >
 
         <div class="product-quantity-container">
