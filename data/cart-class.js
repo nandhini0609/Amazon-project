@@ -3,13 +3,14 @@ class Cart {
     localStorageKey;
 
     constructor(localStorageKey) {
-        this.loadToStorage();
+        this.#loadToStorage();
         this.localStorageKey = 'cart-oop';
         localStorageKey = localStorageKey;
 
     }
 
-    loadToStorage() {
+    #loadToStorage() {
+        //hash is for private fields and we cannot use outside the class;
         this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
 
         if (!this.cartItems || this.cartItems.length === 0) {
