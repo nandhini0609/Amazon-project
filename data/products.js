@@ -26,6 +26,9 @@ class Product {
     this.rating = ProductDetails.rating;
     this.price = ProductDetails.price;
   }
+  extraInfoHTML() {
+    return '';
+  }
 
   // getStar() {
   //   return `images/ratings/rating-${this.rating.star * 10}.png`
@@ -35,6 +38,40 @@ class Product {
   //   return `$${formattingPrice(this.price)}`
   // }
 }
+
+class Clothing extends Product {
+  sizeChartLink;
+
+  constructor(ProductDetails) {
+    super(ProductDetails);
+    this.sizeChartLink = ProductDetails.sizeChartLink
+  }
+  extraInfoHTML() {
+
+    return `<a href = "${this.sizeChartLink}" target = "_blank">Size Chart</a>`;
+  }
+}
+//inheritance concept super is constructor keyword to call parent class constryctor
+
+const tshirt = new Clothing({
+  id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
+  image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
+  name: "Adults Plain Cotton T-Shirt - 2 Pack",
+  rating: {
+    star: 4.5,
+    number: 56
+  },
+  price: 799,
+  keywords: [
+    "tshirts",
+    "apparel",
+    "mens"
+  ],
+  type: "clothing",
+  sizeChartLink: "images/clothing-size-chart.png"
+})
+
+console.log(tshirt);
 
 
 export const product = [
@@ -682,5 +719,18 @@ export const product = [
     ]
   }
 ].map((ProductDetails) => {
+  if (ProductDetails.type === 'clothing') {
+    return new Clothing(ProductDetails);
+  }
   return new Product(ProductDetails);
 });
+
+// const date = new Date();
+// console.log(date);
+// console.log(date.toLocaleDateString);
+
+// in arrow function this is no changable
+// in normal function this is undefined;
+// in function this is undefined but we can give it a value by calling its method call
+
+
