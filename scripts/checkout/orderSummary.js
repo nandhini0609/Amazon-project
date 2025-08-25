@@ -68,7 +68,7 @@ export function renderOrderSummary() {
                  ${matchingElement.matchingElement.name}
                 </div>
                 <div class="product-price">
-                 $${formattingPrice(matchingElement.matchingElement.price)}
+                 $${formattingPrice(matchingElement.matchingElement.priceCents ?? matchingElement.matchingElement.price ?? 0)}
                 </div>
                 <div class="product-quantity">
                   <span>

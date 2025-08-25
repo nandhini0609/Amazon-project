@@ -5,27 +5,28 @@ import { getDeliveryAmount } from '../../data/deliveryOption.js';
 
 export function renderPaymentSummary() {
 
-    let totalPrice = 0;
-    let shippingPriceCents = 0;
+  let totalPrice = 0;
+  let shippingPriceCents = 0;
 
-    cart.forEach((cartItem) => {
-        const { matchingElement } = getElement(cartItem.productsId, cartItem);
+  cart.forEach((cartItem) => {
+    const { matchingElement } = getElement(cartItem.productsId, cartItem);
 
-        // Make sure matchingElement exists before accessing price
-        if (matchingElement && matchingElement.price) {
-            totalPrice += matchingElement.price * cartItem.quantity;
-        }
+    // Make sure matchingElement exists before accessing price
+    if (matchingElement) {
+      const price = matchingElement.priceCents ?? (matchingElement.price * 100) ?? 0
+      totalPrice += price * cartItem.quantity;
+    }
 
-        const deliveryOption = getDeliveryAmount(cartItem.deliveryOptionId);
-        shippingPriceCents += deliveryOption.price;
+    const deliveryOption = getDeliveryAmount(cartItem.deliveryOptionId);
+    shippingPriceCents += deliveryOption.price;
 
 
-    });
-    const totalBeforeTax = totalPrice + shippingPriceCents;
-    const tax = totalBeforeTax * 0.1;
-    const total = totalBeforeTax + tax;
+  });
+  const totalBeforeTax = totalPrice + shippingPriceCents;
+  const tax = totalBeforeTax * 0.1;
+  const total = totalBeforeTax + tax;
 
-    const PaymentSummaryHTML = ` <div class="payment-summary-title">
+  const PaymentSummaryHTML = ` <div class="payment-summary-title">
           Order Summary
         </div>
 
@@ -57,7 +58,7 @@ export function renderPaymentSummary() {
         <button class="place-order-button button-primary">
           Place your order
         </button>`;
-    document.querySelector('.js-payment-summary').innerHTML = PaymentSummaryHTML;
+  document.querySelector('.js-payment-summary').innerHTML = PaymentSummaryHTML;
 
 
 }

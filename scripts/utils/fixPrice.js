@@ -1,3 +1,3 @@
-export function formattingPrice(price) {
-    return (Math.round(price) / 100).toFixed(2);
+export function formattingPrice(priceCents) {
+    return (Math.round(priceCents) / 100).toFixed(2);
 }
