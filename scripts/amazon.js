@@ -1,5 +1,5 @@
 import { cart, addToCart } from '../data/cart.js';
-import { product, loadProductsFetch } from '../data/products.js';
+import { product, loadProducts } from '../data/products.js';
 import { formattingPrice } from './utils/fixPrice.js';
 
 // On page load, set cart quantity from localStorage
@@ -24,9 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-loadProductsFetch().then(() => {
-  renderToGrid();
-});
+loadProducts(renderToGrid);
 export function renderToGrid() {
   let Accumulator = '';
 
