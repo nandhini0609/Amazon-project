@@ -92,7 +92,7 @@ export function loadProductsFetch() {
 
 
 loadProductsFetch().then(() => {
-  console.log('next step')
+  console.log("next step")
 })
 
 

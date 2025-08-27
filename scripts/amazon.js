@@ -1,7 +1,9 @@
 import { cart, addToCart } from '../data/cart.js';
 import { product, loadProductsFetch } from '../data/products.js';
 import { formattingPrice } from './utils/fixPrice.js';
-loadProductsFetch(renderToGrid);
+loadProductsFetch().then(() => {
+  renderToGrid();
+});
 export function renderToGrid() {
   let Accumulator = '';
 
