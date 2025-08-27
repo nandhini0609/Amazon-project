@@ -1,7 +1,7 @@
 import { cart, addToCart } from '../data/cart.js';
-import { product, loadProducts } from '../data/products.js';
+import { product, loadProductsFetch } from '../data/products.js';
 import { formattingPrice } from './utils/fixPrice.js';
-loadProducts(renderToGrid);
+loadProductsFetch(renderToGrid);
 export function renderToGrid() {
   let Accumulator = '';
 
@@ -55,6 +55,8 @@ export function renderToGrid() {
       </div > `
 
   });
+
+  console.log(Accumulator)
 
   document.querySelector('.products-js').innerHTML = Accumulator;
 
