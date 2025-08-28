@@ -1,6 +1,22 @@
 let cart;
 
 loadToStorage();
+// export function loadToStorage() {
+//     cart = JSON.parse(localStorage.getItem('cart'));
+
+//     if (!cart || cart.length === 0) {
+//         return [{
+//             id: '1',
+//             deliveryDays: 7,
+//             price: 0
+//         }, {
+//             id: '2',
+//             deliveryDays: 3,
+//             price: 499
+//         }]
+//     }
+// }
+
 export function loadToStorage() {
     cart = JSON.parse(localStorage.getItem('cart'));
 
@@ -8,6 +24,8 @@ export function loadToStorage() {
         return [];
     }
 }
+
+
 
 
 function saveToCart() {
